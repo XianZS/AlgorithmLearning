@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 t = int(input())
 
 xxx = []
@@ -6,16 +8,19 @@ xxx = []
 def main():
     n = int(input())
     nums = list(map(int, input().split()))
-    some = [[0 for _ in range(n)] for _ in range(n)]
-    res = 0
-    for x in range(n):
-        for y in range(x + 1, n):
-            # some[x][y] = nums[y] - nums[x]
-            if nums[y] - nums[x] == y - x:
-                # print(f"({x},{y})")
-                res += 1
-    # print()
-    xxx.append(str(res))
+    res = defaultdict(int)
+    for index in range(n):
+        res[nums[index] - index] += 1
+    # print(res)
+    xx = res.values()
+    some = 0
+    for cho in xx:
+        if cho > 1:
+            cho -= 1
+            some += cho * (cho + 1) // 2
+        else:
+            pass
+    xxx.append(str(some))
 
 
 for _ in range(t):
